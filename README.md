@@ -1,1 +1,1 @@
-# react-native-qr-image-reader
+# rn-qr-image-reader
