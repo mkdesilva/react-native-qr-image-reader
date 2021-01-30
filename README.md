@@ -5,17 +5,17 @@ React Native module to read QR codes and barcodes for iOS & Android
 ## Installation
 
 ```sh
-npm install react-native-qr-image-reader
+yarn install react-native-qr-image-reader
 ```
 
 ## Usage
 
 ```js
-import QrImageReader from "react-native-qr-image-reader";
+import QrImageReader from 'react-native-qr-image-reader';
 
 // ...
 
-const result = await QrImageReader.multiply(3, 7);
+const { result } = await QrImageReader.decode('file://pathToFile');
 ```
 
 ## Contributing
