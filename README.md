@@ -2,6 +2,8 @@
 
 React Native module to read QR codes and barcodes for iOS & Android
 
+iOS uses ZXingify-Objc
+
 ## Installation
 
 ```sh
