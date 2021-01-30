@@ -1,18 +1,33 @@
-import * as React from 'react';
-
-import { StyleSheet, View, Text } from 'react-native';
+import React, { useEffect } from 'react';
+import { launchImageLibrary } from 'react-native-image-picker';
+import { StyleSheet, View, Text, Button } from 'react-native';
 import QrImageReader from 'react-native-qr-image-reader';
 
-
 export default function App() {
-  const [result, setResult] = React.useState<number | undefined>();
+  const [result, setResult] = React.useState<string | undefined>();
 
-  React.useEffect(() => {
-    QrImageReader.multiply(3, 7).then(setResult);
-  }, []);
+  const onChooseImage = () => {
+    launchImageLibrary({ mediaType: 'photo' }, async (res) => {
+      if (res.uri) {
+        console.log(res.uri);
+        const {
+          result: decodeResult,
+          errorCode,
+          errorMessage,
+        } = await QrImageReader.decode(res.uri);
+
+        console.log('Error Code: ' + errorCode);
+        console.log('Error Message: ' + errorMessage);
+        console.log('Result: ' + decodeResult);
+
+        if (decodeResult) setResult(decodeResult);
+      }
+    });
+  };
 
   return (
     <View style={styles.container}>
+      <Button title="Choose Image" onPress={onChooseImage} />
       <Text>Result: {result}</Text>
     </View>
   );

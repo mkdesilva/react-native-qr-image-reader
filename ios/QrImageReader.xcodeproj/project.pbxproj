@@ -7,10 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-
-		5E555C0D2413F4C50049A1A2 /* QrImageReader.m in Sources */ = {isa = PBXBuildFile; fileRef = B3E7B5891CC2AC0600A0062D /* QrImageReader.m */; };
-		F4FF95D7245B92E800C19C63 /*  QrImageReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FF95D6245B92E800C19C63 /*  QrImageReader.swift */; };
-
+		8328E7DA4935E1555FD9FEE7 /* libPods-QrImageReader.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 15282C13350BA211BB1EE9AB /* libPods-QrImageReader.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -27,11 +24,11 @@
 
 /* Begin PBXFileReference section */
 		134814201AA4EA6300B7C361 /* libQrImageReader.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libQrImageReader.a; sourceTree = BUILT_PRODUCTS_DIR; };
-
+		15282C13350BA211BB1EE9AB /* libPods-QrImageReader.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-QrImageReader.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4D0E3DEC25C552FA000EFF76 /* QrImageReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QrImageReader.h; sourceTree = "<group>"; };
+		5463EC13D94AF39830530C65 /* Pods-QrImageReader.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QrImageReader.debug.xcconfig"; path = "Target Support Files/Pods-QrImageReader/Pods-QrImageReader.debug.xcconfig"; sourceTree = "<group>"; };
 		B3E7B5891CC2AC0600A0062D /* QrImageReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QrImageReader.m; sourceTree = "<group>"; };
-		F4FF95D5245B92E700C19C63 /* QrImageReader-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "QrImageReader-Bridging-Header.h"; sourceTree = "<group>"; };
-		F4FF95D6245B92E800C19C63 /* QrImageReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QrImageReader.swift; sourceTree = "<group>"; };
-
+		D40B44930F7D1A500F19177A /* Pods-QrImageReader.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QrImageReader.release.xcconfig"; path = "Target Support Files/Pods-QrImageReader/Pods-QrImageReader.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,6 +36,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8328E7DA4935E1555FD9FEE7 /* libPods-QrImageReader.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,13 +54,30 @@
 		58B511D21A9E6C8500147676 = {
 			isa = PBXGroup;
 			children = (
-
-				F4FF95D6245B92E800C19C63 /* QrImageReader.swift */,
+				4D0E3DEC25C552FA000EFF76 /* QrImageReader.h */,
 				B3E7B5891CC2AC0600A0062D /* QrImageReader.m */,
-				F4FF95D5245B92E700C19C63 /* QrImageReader-Bridging-Header.h */,
-
 				134814211AA4EA7D00B7C361 /* Products */,
+				DB44C893DF242729020797D0 /* Pods */,
+				696E90F69E4140ED22481700 /* Frameworks */,
 			);
+			sourceTree = "<group>";
+		};
+		696E90F69E4140ED22481700 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				15282C13350BA211BB1EE9AB /* libPods-QrImageReader.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DB44C893DF242729020797D0 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				5463EC13D94AF39830530C65 /* Pods-QrImageReader.debug.xcconfig */,
+				D40B44930F7D1A500F19177A /* Pods-QrImageReader.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -72,6 +87,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 58B511EF1A9E6C8500147676 /* Build configuration list for PBXNativeTarget "QrImageReader" */;
 			buildPhases = (
+				372F067A8CE311761FF42280 /* [CP] Check Pods Manifest.lock */,
 				58B511D71A9E6C8500147676 /* Sources */,
 				58B511D81A9E6C8500147676 /* Frameworks */,
 				58B511D91A9E6C8500147676 /* CopyFiles */,
@@ -101,11 +117,11 @@
 			};
 			buildConfigurationList = 58B511D61A9E6C8500147676 /* Build configuration list for PBXProject "QrImageReader" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				English,
 				en,
+				Base,
 			);
 			mainGroup = 58B511D21A9E6C8500147676;
 			productRefGroup = 58B511D21A9E6C8500147676;
@@ -117,15 +133,36 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		372F067A8CE311761FF42280 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-QrImageReader-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		58B511D71A9E6C8500147676 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-
-				F4FF95D7245B92E800C19C63 /* QrImageReader.swift in Sources */,
-				B3E7B58A1CC2AC0600A0062D /* QrImageReader.m in Sources */,
-
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -227,6 +264,7 @@
 		};
 		58B511F01A9E6C8500147676 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5463EC13D94AF39830530C65 /* Pods-QrImageReader.debug.xcconfig */;
 			buildSettings = {
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -238,16 +276,15 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = QrImageReader;
 				SKIP_INSTALL = YES;
-
 				SWIFT_OBJC_BRIDGING_HEADER = "QrImageReader-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-
 			};
 			name = Debug;
 		};
 		58B511F11A9E6C8500147676 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D40B44930F7D1A500F19177A /* Pods-QrImageReader.release.xcconfig */;
 			buildSettings = {
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -259,10 +296,8 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = QrImageReader;
 				SKIP_INSTALL = YES;
-
 				SWIFT_OBJC_BRIDGING_HEADER = "QrImageReader-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
-
 			};
 			name = Release;
 		};
