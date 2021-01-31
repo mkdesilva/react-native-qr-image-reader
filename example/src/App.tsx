@@ -14,7 +14,7 @@ export default function App() {
           result: decodeResult,
           errorCode,
           errorMessage,
-        } = await QrImageReader.decode(res.uri);
+        } = await QrImageReader.decode({ path: res.uri });
 
         console.log('Error Code: ' + errorCode);
         console.log('Error Message: ' + errorMessage);

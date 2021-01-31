@@ -8,8 +8,12 @@ type DecodeResult = {
   result?: string;
 };
 
+type DecodeOptions = {
+  path: string;
+};
+
 type QrImageReaderType = {
-  decode(imagePath: string): Promise<DecodeResult>;
+  decode(options: DecodeOptions): Promise<DecodeResult>;
 };
 
 const { QrImageReader } = NativeModules;

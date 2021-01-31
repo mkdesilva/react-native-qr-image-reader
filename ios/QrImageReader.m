@@ -1,6 +1,8 @@
 #import "QrImageReader.h"
 #import "ZXingObjC.h"
 
+#import <React/RCTConvert.h>
+
 @implementation QrImageReader
 
 RCT_EXPORT_MODULE()
@@ -14,7 +16,7 @@ NSString* noCodes = @"no_codes";
 NSString* decodeError = @"decode_error";
 
 RCT_REMAP_METHOD(decode,
-                 imagePath:(nonnull NSString*)imagePath
+                 decodeOptions: (nonnull NSDictionary *)options
                  withResolver:(RCTPromiseResolveBlock)resolve
                  withRejecter:(RCTPromiseRejectBlock)reject)
 {
@@ -23,6 +25,8 @@ RCT_REMAP_METHOD(decode,
   CGImageRef imageToDecode = NULL;  // Given a CGImage in which we are looking for barcodes
   
   NSFileManager *fileManager = [NSFileManager defaultManager];
+  
+  NSString *imagePath = [RCTConvert NSString: options[@"path"]];
   
   NSURL *url = [NSURL URLWithString: imagePath];
   NSString *path = [url path];
