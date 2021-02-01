@@ -1,6 +1,8 @@
 # react-native-qr-image-reader
 
-React Native module to read QR codes and barcodes for iOS & Android
+(iOS ONLY FOR NOW)
+
+React Native module to read QR codes and barcodes for iOS ~~& Android~~
 
 iOS uses ZXingify-Objc
 
