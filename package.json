@@ -1,6 +1,6 @@
 {
   "name": "react-native-qr-image-reader",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "React Native module to read QR codes and barcodes for iOS & Android",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
