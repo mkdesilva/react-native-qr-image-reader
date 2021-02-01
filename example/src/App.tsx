@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { launchImageLibrary } from 'react-native-image-picker';
 import { StyleSheet, View, Text, Button } from 'react-native';
 import QrImageReader from 'react-native-qr-image-reader';
