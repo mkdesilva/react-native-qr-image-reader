@@ -9,7 +9,7 @@ iOS uses ZXingify-Objc
 ## Installation
 
 ```sh
-yarn install react-native-qr-image-reader
+yarn add react-native-qr-image-reader
 ```
 
 ## Usage
