@@ -20,7 +20,7 @@ RCT_REMAP_METHOD(decode,
                  withResolver:(RCTPromiseResolveBlock)resolve
                  withRejecter:(RCTPromiseRejectBlock)reject)
 {
-  NSMutableDictionary *resultObj = [[NSMutableDictionary alloc]initWithCapacity:2];
+  NSMutableDictionary *resultObj = [[NSMutableDictionary alloc]initWithCapacity:3];
   
   CGImageRef imageToDecode = NULL;  // Given a CGImage in which we are looking for barcodes
   
@@ -33,10 +33,10 @@ RCT_REMAP_METHOD(decode,
   
   BOOL doesFileExist = [fileManager fileExistsAtPath: path];
   if (doesFileExist) {
-      imageToDecode = [[UIImage alloc] initWithContentsOfFile: path].CGImage;
+    imageToDecode = [[UIImage alloc] initWithContentsOfFile: path].CGImage;
   }
   else {
-      // reject
+    // reject
     [resultObj setObject:fileDoesNotExist forKey:errorCodeKey];
     [resultObj setObject:@"File does not exist" forKey:errorMessageKey];
     return;
@@ -62,11 +62,11 @@ RCT_REMAP_METHOD(decode,
     [resultObj setObject: contents forKey:resultKey];
     resolve(resultObj);
     // The barcode format, such as a QR code or UPC-A
-//    ZXBarcodeFormat format = result.barcodeFormat;
+    //    ZXBarcodeFormat format = result.barcodeFormat;
   } else {
     // Use error to determine why we didn't get a result, such as a barcode
     // not being found, an invalid checksum, or a format inconsistency.
-
+    
     [resultObj setObject: decodeError forKey:errorCodeKey];
     [resultObj setObject:[error localizedDescription] forKey:errorMessageKey];
     resolve(resultObj);
