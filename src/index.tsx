@@ -1,15 +1,15 @@
 import { NativeModules } from 'react-native';
 
-type ErrorCode = 'no_file' | 'decode_error' | 'other';
+export type ErrorCode = 'no_file' | 'decode_error' | 'other';
 
-type DecodeResult = {
+export type DecodeResult = {
   errorCode?: ErrorCode;
   errorMessage?: string;
   result?: string;
 };
 
-type DecodeOptions = {
-  path: string;
+export type DecodeOptions = {
+  path?: string;
 };
 
 type QrImageReaderType = {
