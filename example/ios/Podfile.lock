@@ -238,7 +238,7 @@ PODS:
   - React-jsinspector (0.63.4)
   - react-native-image-picker (3.1.4):
     - React-Core
-  - react-native-qr-image-reader (0.1.6):
+  - react-native-qr-image-reader (0.1.10):
     - React-Core
   - React-RCTActionSheet (0.63.4):
     - React-Core/RCTActionSheetHeaders (= 0.63.4)
@@ -342,7 +342,7 @@ DEPENDENCIES:
   - React-jsiexecutor (from `../node_modules/react-native/ReactCommon/jsiexecutor`)
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
   - react-native-image-picker (from `../node_modules/react-native-image-picker`)
-  - react-native-qr-image-reader (from `../..`)
+  - react-native-qr-image-reader (from `../../`)
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
   - React-RCTAnimation (from `../node_modules/react-native/Libraries/NativeAnimation`)
   - React-RCTBlob (from `../node_modules/react-native/Libraries/Blob`)
@@ -404,7 +404,7 @@ EXTERNAL SOURCES:
   react-native-image-picker:
     :path: "../node_modules/react-native-image-picker"
   react-native-qr-image-reader:
-    :path: "../.."
+    :path: "../../"
   React-RCTActionSheet:
     :path: "../node_modules/react-native/Libraries/ActionSheetIOS"
   React-RCTAnimation:
@@ -456,7 +456,7 @@ SPEC CHECKSUMS:
   React-jsiexecutor: 93bd528844ad21dc07aab1c67cb10abae6df6949
   React-jsinspector: 58aef7155bc9a9683f5b60b35eccea8722a4f53a
   react-native-image-picker: 28d8d1f5a643119876b8b2c7d4d1dcfb2b232dd4
-  react-native-qr-image-reader: a862ebb5a18fe82f5a3c76bb60292976e5427c90
+  react-native-qr-image-reader: c993c4b01d83115d3b8f284046ed4d41f5a6d97c
   React-RCTActionSheet: 89a0ca9f4a06c1f93c26067af074ccdce0f40336
   React-RCTAnimation: 1bde3ecc0c104c55df246eda516e0deb03c4e49b
   React-RCTBlob: a97d378b527740cc667e03ebfa183a75231ab0f0
@@ -470,6 +470,6 @@ SPEC CHECKSUMS:
   Yoga: 4bd86afe9883422a7c4028c00e34790f560923d6
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: f401a0433dbde185e4af7d28d4eadf51c19951a1
+PODFILE CHECKSUM: 432ba8b87455bfa33d4ac3e26e6663204af8df2e
 
 COCOAPODS: 1.10.0
