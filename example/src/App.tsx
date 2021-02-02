@@ -1,6 +1,6 @@
 import React from 'react';
 import { launchImageLibrary } from 'react-native-image-picker';
-import { StyleSheet, View, Text, Button, Platform } from 'react-native';
+import { StyleSheet, View, Text, Button } from 'react-native';
 import QrImageReader, { DecodeOptions } from 'react-native-qr-image-reader';
 
 export default function App() {
