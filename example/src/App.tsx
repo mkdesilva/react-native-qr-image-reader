@@ -17,10 +17,12 @@ export default function App() {
     console.log('Error Message: ' + errorMessage);
     console.log('Result: ' + decodeResult);
 
-    if (decodeResult) setResult(decodeResult);
+    setResult(decodeResult || 'undefined');
   };
 
   const onChooseImage = () => {
+    setResult('');
+
     launchImageLibrary({ mediaType: 'photo' }, async (res) => {
       decode({
         path: res.uri,
