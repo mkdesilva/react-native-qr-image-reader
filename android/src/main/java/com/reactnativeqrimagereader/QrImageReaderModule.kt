@@ -11,6 +11,9 @@ import java.io.FileInputStream
 import java.io.InputStream
 import java.net.URL
 import javax.annotation.Nullable
+import kotlin.math.max
+import kotlin.math.min
+import kotlin.math.roundToInt
 
 
 class QrImageReaderModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaModule(reactContext) {
@@ -68,12 +71,15 @@ class QrImageReaderModule(reactContext: ReactApplicationContext) : ReactContextB
       return
     }
 
-    val bitmap = getBitmapFromFileString(imagePath)
+    var bitmap = getBitmapFromFileString(imagePath)
+    bitmap = bitmap?.let { scaleDown(it, 400f) };
 
     if (bitmap == null) {
       decodeError(map, promise)
       return
     }
+
+
 
     val codeString = readCodeFromBitmap(bitmap)
     if (codeString == null) {
@@ -97,7 +103,7 @@ class QrImageReaderModule(reactContext: ReactApplicationContext) : ReactContextB
     bMap.getPixels(intArray, 0, bMap.width, 0, 0, bMap.width, bMap.height)
     val source: LuminanceSource = RGBLuminanceSource(bMap.width, bMap.height, intArray)
     val bitmap = BinaryBitmap(HybridBinarizer(source))
-    val reader: Reader = MultiFormatReader() 
+    val reader: Reader = MultiFormatReader()
     try {
       val result: Result = reader.decode(bitmap)
       contents = result.text
@@ -109,5 +115,25 @@ class QrImageReaderModule(reactContext: ReactApplicationContext) : ReactContextB
       e.printStackTrace()
     }
     return contents
+  }
+
+  private fun scaleDown(realImage: Bitmap, maxImageSize: Float,
+                        filter: Boolean = true): Bitmap? {
+    val minDimension = min(realImage.width, realImage.height);
+    val maxDimension = max(realImage.width, realImage.height);
+
+    val aspectRatio = minDimension.toFloat() / maxDimension;
+    if (aspectRatio <= 0.2) { // Don't resize images that are very skinny
+      return realImage;
+    }
+
+    val scaleRatio = min(
+      maxImageSize / realImage.width,
+      maxImageSize / realImage.height)
+    if (scaleRatio >= 1) return realImage; // Only rescale if the image will be scaled down
+    val width = (scaleRatio * realImage.width).roundToInt();
+    val height = (scaleRatio * realImage.height).roundToInt();
+    return Bitmap.createScaledBitmap(realImage, width,
+      height, filter)
   }
 }
