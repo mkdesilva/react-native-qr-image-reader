@@ -18,6 +18,13 @@ NSString* decodeError = @"decode_error";
 - (UIImage *)compressImage:(UIImage *)originalImage {
   NSData* data = UIImageJPEGRepresentation(originalImage, 0.8);
   UIImage *image = [UIImage imageWithData:data];
+  CGFloat minDimension = MIN(image.size.width, image.size.height);
+  CGFloat maxDimension = MAX(image.size.width, image.size.height);
+  CGFloat aspectRatio = minDimension / maxDimension;
+  
+  if (aspectRatio <= 0.2) { // Don't resize images if they are skinny
+    return image;
+  }
   
   float width = 400;
   float height = 400;
