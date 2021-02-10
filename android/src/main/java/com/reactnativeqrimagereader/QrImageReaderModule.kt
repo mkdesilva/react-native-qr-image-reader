@@ -78,9 +78,7 @@ class QrImageReaderModule(reactContext: ReactApplicationContext) : ReactContextB
       decodeError(map, promise)
       return
     }
-
-
-
+    
     val codeString = readCodeFromBitmap(bitmap)
     if (codeString == null) {
       decodeError(map, promise)
