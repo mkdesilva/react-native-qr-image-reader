@@ -15,6 +15,39 @@ NSString* errorMessageKey = @"errorMessage";
 NSString* noCodes = @"no_codes";
 NSString* decodeError = @"decode_error";
 
+- (UIImage *)compressImage:(UIImage *)originalImage {
+  NSData* data = UIImageJPEGRepresentation(originalImage, 0.8);
+  UIImage *image = [UIImage imageWithData:data];
+  CGFloat minDimension = MIN(image.size.width, image.size.height);
+  CGFloat maxDimension = MAX(image.size.width, image.size.height);
+  CGFloat aspectRatio = minDimension / maxDimension;
+  
+  if (aspectRatio <= 0.2) { // Don't resize images if they are skinny
+    return image;
+  }
+  
+  float width = 400;
+  float height = 400;
+  
+  if (image.size.width <= width && image.size.height <= height) {
+    return image;
+  }
+
+  CGFloat oldWidth = image.size.width;
+  CGFloat oldHeight = image.size.height;
+  
+  CGFloat scaleFactor = (oldWidth > oldHeight) ? width / oldWidth : height / oldHeight;
+  
+  CGFloat newHeight = oldHeight * scaleFactor;
+  CGFloat newWidth = oldWidth * scaleFactor;
+  
+  UIGraphicsBeginImageContext(CGSizeMake(newWidth, newHeight));
+  [originalImage drawInRect:CGRectMake(0, 0, newWidth, newHeight)];
+  UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+  UIGraphicsEndImageContext();
+  return newImage;
+}
+
 RCT_REMAP_METHOD(decode,
                  decodeOptions: (nonnull NSDictionary *)options
                  withResolver:(RCTPromiseResolveBlock)resolve
@@ -33,7 +66,8 @@ RCT_REMAP_METHOD(decode,
   
   BOOL doesFileExist = [fileManager fileExistsAtPath: path];
   if (doesFileExist) {
-    imageToDecode = [[UIImage alloc] initWithContentsOfFile: path].CGImage;
+    UIImage* uiImage = [[UIImage alloc] initWithContentsOfFile: path];
+    imageToDecode = [self compressImage: uiImage].CGImage;
   }
   else {
     // reject
@@ -44,11 +78,7 @@ RCT_REMAP_METHOD(decode,
   
   ZXLuminanceSource *source = [[ZXCGImageLuminanceSource alloc] initWithCGImage:imageToDecode];
   ZXBinaryBitmap *bitmap = [ZXBinaryBitmap binaryBitmapWithBinarizer:[ZXHybridBinarizer binarizerWithSource:source]];
-  
   NSError *error = nil;
-  
-  // There are a number of hints we can give to the reader, including
-  // possible formats, allowed lengths, and the string encoding.
   ZXDecodeHints *hints = [ZXDecodeHints hints];
   
   ZXMultiFormatReader *reader = [ZXMultiFormatReader reader];
@@ -56,8 +86,6 @@ RCT_REMAP_METHOD(decode,
                               hints:hints
                               error:&error];
   if (result) {
-    // The coded result as a string. The raw data can be accessed with
-    // result.rawBytes and result.length.
     NSString *contents = result.text;
     [resultObj setObject: contents forKey:resultKey];
     resolve(resultObj);
