@@ -79,11 +79,12 @@ RCT_REMAP_METHOD(decode,
   
   NSURL *url = [NSURL URLWithString: imagePath];
   NSString *path = [url path];
+  UIImage* uiImage = nil;
   
   BOOL doesFileExist = [fileManager fileExistsAtPath: path];
   if (doesFileExist) {
-    UIImage* uiImage = [[UIImage alloc] initWithContentsOfFile: path];
-    imageToDecode = [self compressImage: uiImage].CGImage;
+    uiImage = [[UIImage alloc] initWithContentsOfFile: path];
+    imageToDecode = uiImage.CGImage;
   }
   else {
     // reject
@@ -95,6 +96,11 @@ RCT_REMAP_METHOD(decode,
   NSError *error = nil;
   
   NSString* result = [self readCodeFromImage:imageToDecode error:&error];
+  
+  if (result == nil) {
+    imageToDecode = [self compressImage: uiImage].CGImage;
+    result = [self readCodeFromImage:imageToDecode error:&error];
+  }
   
   if (result) {
     [resultObj setObject: result forKey:resultKey];
