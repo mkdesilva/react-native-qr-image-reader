@@ -48,6 +48,22 @@ NSString* decodeError = @"decode_error";
   return newImage;
 }
 
+- (NSString *) readCodeFromImage:(CGImageRef) imageToDecode error: (NSError **) error {
+  
+  ZXLuminanceSource *source = [[ZXCGImageLuminanceSource alloc] initWithCGImage:imageToDecode];
+  ZXBinaryBitmap *bitmap = [ZXBinaryBitmap binaryBitmapWithBinarizer:[ZXHybridBinarizer binarizerWithSource:source]];
+  ZXDecodeHints *hints = [ZXDecodeHints hints];
+  
+  ZXMultiFormatReader *reader = [ZXMultiFormatReader reader];
+  ZXResult *result = [reader decode:bitmap
+                              hints:hints
+                              error:error];
+  if (result) {
+    return result.text;
+  }
+  return nil;
+}
+
 RCT_REMAP_METHOD(decode,
                  decodeOptions: (nonnull NSDictionary *)options
                  withResolver:(RCTPromiseResolveBlock)resolve
@@ -76,18 +92,12 @@ RCT_REMAP_METHOD(decode,
     return;
   }
   
-  ZXLuminanceSource *source = [[ZXCGImageLuminanceSource alloc] initWithCGImage:imageToDecode];
-  ZXBinaryBitmap *bitmap = [ZXBinaryBitmap binaryBitmapWithBinarizer:[ZXHybridBinarizer binarizerWithSource:source]];
   NSError *error = nil;
-  ZXDecodeHints *hints = [ZXDecodeHints hints];
   
-  ZXMultiFormatReader *reader = [ZXMultiFormatReader reader];
-  ZXResult *result = [reader decode:bitmap
-                              hints:hints
-                              error:&error];
+  NSString* result = [self readCodeFromImage:imageToDecode error:&error];
+  
   if (result) {
-    NSString *contents = result.text;
-    [resultObj setObject: contents forKey:resultKey];
+    [resultObj setObject: result forKey:resultKey];
     resolve(resultObj);
     // The barcode format, such as a QR code or UPC-A
     //    ZXBarcodeFormat format = result.barcodeFormat;
