@@ -72,14 +72,20 @@ class QrImageReaderModule(reactContext: ReactApplicationContext) : ReactContextB
     }
 
     var bitmap = getBitmapFromFileString(imagePath)
-    bitmap = bitmap?.let { scaleDown(it, 400f) };
 
     if (bitmap == null) {
       decodeError(map, promise)
       return
     }
-    
-    val codeString = readCodeFromBitmap(bitmap)
+
+    var codeString = readCodeFromBitmap(bitmap)
+
+    if (codeString == null) {
+      // If no code was found, try to scale down the image and read the code again
+      bitmap = scaleDown(bitmap, 400f)
+      codeString = readCodeFromBitmap(bitmap)
+    }
+
     if (codeString == null) {
       decodeError(map, promise)
       return
@@ -116,7 +122,7 @@ class QrImageReaderModule(reactContext: ReactApplicationContext) : ReactContextB
   }
 
   private fun scaleDown(realImage: Bitmap, maxImageSize: Float,
-                        filter: Boolean = true): Bitmap? {
+                        filter: Boolean = true): Bitmap {
     val minDimension = min(realImage.width, realImage.height);
     val maxDimension = max(realImage.width, realImage.height);
 
