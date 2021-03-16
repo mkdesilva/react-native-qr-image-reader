@@ -3,13 +3,10 @@ package com.reactnativeqrimagereader
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
-import android.util.Base64
 import com.facebook.react.bridge.*
 import com.google.zxing.*
 import com.google.zxing.common.HybridBinarizer
-import java.io.FileInputStream
 import java.io.InputStream
-import java.net.URL
 import javax.annotation.Nullable
 import kotlin.math.max
 import kotlin.math.min
@@ -25,37 +22,18 @@ class QrImageReaderModule(reactContext: ReactApplicationContext) : ReactContextB
   @Nullable
   @Throws(Exception::class)
   private fun getBitmapFromFileString(path: String): Bitmap? {
-    var str = path
-    if (str.startsWith("/")) {
-      str = "file://$str"
+    val uri = Uri.parse(path)
+
+    var iStream: InputStream? = null
+    var image: Bitmap?
+
+    try {
+      iStream = reactApplicationContext.contentResolver.openInputStream(uri)
+      image = BitmapFactory.decodeStream(iStream)
+    } finally {
+      iStream?.close()
     }
-    val image: Bitmap
-    if (str.startsWith("file") || str.startsWith("http") || str.startsWith("content")) {
-      var iStream: InputStream? = null
-      try {
-        if (str.startsWith("file")) {
-          iStream = FileInputStream(str)
-        } else if (str.startsWith("http")) {
-          val url = URL(str)
-          val connection = url.openConnection()
-          connection.connect()
-          iStream = connection.getInputStream()
-        } else if (str.startsWith("content")) {
-          val uri = Uri.parse(str)
-          iStream = reactApplicationContext.contentResolver.openInputStream((uri))
-        }
-        image = BitmapFactory.decodeStream(iStream)
-      } finally {
-        iStream?.close()
-      }
-    } else {
-      // maybe base64 encoding string
-      if (str.startsWith("data:")) {
-        str = str.substring(str.indexOf(",") + 1)
-      }
-      val bytes: ByteArray = Base64.decode(str, Base64.DEFAULT)
-      image = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
-    }
+
     return image
   }
 
