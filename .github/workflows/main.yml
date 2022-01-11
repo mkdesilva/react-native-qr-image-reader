@@ -32,7 +32,8 @@ jobs:
         run: |
           yarn install
           
-      - name: Run test
+      - name: Run lint
         run: |
-          yarn test
+          yarn lint
+      
         
